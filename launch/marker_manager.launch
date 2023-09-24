@@ -1,0 +1,42 @@
+<launch>
+	<!-- global origin subscriber for translating lat/lon/alt to enu -->
+	<arg name="global_origin_topic" default="/global_origin"/>
+
+	<!-- publishers for marker_manager -->
+	<arg name="marker_list_topic" default="/marker_list"/>
+	<arg name="current_marker_topic" default="/current_marker"/>
+	<arg name="current_waypoint_topic" default="/current_waypoint"/>
+
+	<!-- marker_manager services -->
+	<arg name="add_marker_service" default="/add_marker"/>
+	<arg name="clear_markers_service" default="/clear_markers"/>
+	<arg name="edit_marker_service" default="/edit_marker"/>
+	<arg name="insert_marker_service" default="/insert_marker"/>
+	<arg name="publish_current_marker_service" default="/publish_current_marker"/>
+	<arg name="plan_home_marker_service" default="/plan_home_marker"/>
+	<arg name="remove_current_marker_service" default="/remove_current_marker"/>
+	<arg name="remove_marker_service" default="/remove_marker"/>
+	<arg name="reorder_marker_service" default="/reorder_marker"/>
+	<arg name="reorder_markers_service" default="/reorder_markers"/>
+
+	<!-- launch gamepad input (translates joy to cmd_vel) -->
+	<node pkg="marker_manager" name="marker_manager"
+	type="marker_mngr.py" output="screen" respawn="false">
+		<param name="global_origin_topic" value="$(arg global_origin_topic)"/>
+
+		<param name="marker_list_topic" value="$(arg marker_list_topic)"/>
+		<param name="current_marker_topic" value="$(arg current_marker_topic)"/>
+		<param name="current_waypoint_topic" value="$(arg current_waypoint_topic)"/>
+
+		<param name="add_marker_service" value="$(arg add_marker_service)"/>
+		<param name="clear_markers_service" value="$(arg clear_markers_service)"/>
+		<param name="edit_marker_service" value="$(arg edit_marker_service)"/>
+		<param name="insert_marker_service" value="$(arg insert_marker_service)"/>
+		<param name="publish_current_marker_service" value="$(arg publish_current_marker_service)"/>
+		<param name="plan_home_marker_service" value="$(arg plan_home_marker_service)"/>
+		<param name="remove_current_marker_service" value="$(arg remove_current_marker_service)"/>
+		<param name="remove_marker_service" value="$(arg remove_marker_service)"/>
+		<param name="reorder_marker_service" value="$(arg reorder_marker_service)"/>
+		<param name="reorder_markers_service" value="$(arg reorder_markers_service)"/>
+	</node>
+</launch>
